@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const PORT = 4000;
 const cors = require("cors");
 const app = express();
 
@@ -57,5 +56,6 @@ app.get("/posts", (req, res) => {
     const data = getPost();
     res.send(data);
 });
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
