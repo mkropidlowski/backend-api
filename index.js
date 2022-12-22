@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const moment = require("moment");
 const fs = require("fs");
 const cors = require("cors");
 const app = express();
@@ -11,8 +12,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const dataPath = "./db/formEmail.json";
 const postsPath = "./db/posts-db.json";
 
+const addDate = () => {
+    const actualTime = moment().format().replace(/T/, " ");
+    return actualTime.substring(0, actualTime.length - 6);
+};
+
+console.log(addDate());
 const saveEmail = (data) => {
     const stringifyData = JSON.stringify(data, null, 2);
+    console.log(stringifyData);
     fs.writeFileSync(dataPath, stringifyData);
 };
 
@@ -34,7 +42,11 @@ const getPost = () => {
 app.post("/api/email", (req, res) => {
     const existEmail = getEmail();
     const newEmailId = Math.floor(10000 + Math.random() * 10000);
-    existEmail[newEmailId] = req.body;
+    let emailObj = {
+        added_at: addDate(),
+        content: req.body,
+    };
+    existEmail[newEmailId] = emailObj;
     saveEmail(existEmail);
     res.send({ success: true, msg: "Email send." });
 });
@@ -47,7 +59,11 @@ app.get("/emails", (req, res) => {
 app.post("/posts", (req, res) => {
     const existPosts = getPost();
     const newPostId = Math.floor(10000 + Math.random() * 10000);
-    existPosts[newPostId] = req.body;
+    let postObj = {
+        added_at: addDate(),
+        postContent: req.body,
+    };
+    existPosts[newPostId] = postObj;
     savePost(existPosts);
     res.send({ success: true, msg: "Post added." });
 });

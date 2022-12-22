@@ -1,22 +1,10 @@
 {
-  "15": {
-    "name": "Jan Test",
-    "sender_email": "test@test.pl",
-    "message": "tsotwane"
-  },
-  "12740": {
-    "name": "Michał Kropidłowski",
-    "sender_email": "mi715@wp.pl",
-    "message": "Elo"
-  },
-  "14625": {
-    "name": "Adam Adamczyk",
-    "sender_email": "adamczyk@poczta.pl",
-    "message": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. "
-  },
-  "19447": {
-    "name": "Michał Kropidłowski",
-    "sender_email": "mkropidlowsky@gmail.com",
-    "message": "Wiadomość testowa."
+  "12086": {
+    "added_at": "2022-12-22 14:02:36",
+    "content": {
+      "name": "Jan Nowak",
+      "sender_email": "mi715@wp.pl",
+      "message": "TEST"
+    }
   }
 }
