@@ -13,11 +13,10 @@ const dataPath = "./db/formEmail.json";
 const postsPath = "./db/posts-db.json";
 
 const addDate = () => {
-    const actualTime = moment().format().replace(/T/, " ");
-    return actualTime.substring(0, actualTime.length - 6);
+    const actualTime = new Date().toLocaleString();
+    return actualTime;
 };
 
-console.log(addDate());
 const saveEmail = (data) => {
     const stringifyData = JSON.stringify(data, null, 2);
     console.log(stringifyData);
