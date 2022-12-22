@@ -1,7 +1,18 @@
 {
-  "1": {
-    "author": "Joe Doe",
-    "heading": "1_To jest nagłówek",
-    "content": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters."
+  "15133": {
+    "added_at": "22.12.2022 - 15:25:26",
+    "postContent": {
+      "heading": "test posta dodawania do APII",
+      "author": "Jan Nowak",
+      "content": "TEST"
+    }
+  },
+  "16589": {
+    "added_at": "22.12.2022 - 15:28:03",
+    "postContent": {
+      "heading": "POST_1",
+      "author": "Jan Nowaks",
+      "content": "POST_1"
+    }
   }
 }

@@ -11,9 +11,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const dataPath = "./db/formEmail.json";
 const postsPath = "./db/posts-db.json";
+process.env.TZ = "europe/warsaw";
 
-const addDate = () => {
-    const actualTime = new Date().toLocaleString();
+const date = new Date();
+
+const addDate = (time) => {
+    let day = time.getDate().toString().padStart(2, "0");
+    let month = (time.getMonth() + 1).toString().padStart(2, "0");
+    let year = time.getFullYear();
+    let hours = time.getHours().toString().padStart(2, "0");
+    let minutes = time.getMinutes().toString().padStart(2, "0");
+    let seconds = time.getSeconds().toString().padStart(2, "0");
+
+    let actualTime = `${day}.${month}.${year} - ${hours}:${minutes}:${seconds}`;
     return actualTime;
 };
 
@@ -42,7 +52,7 @@ app.post("/api/email", (req, res) => {
     const existEmail = getEmail();
     const newEmailId = Math.floor(10000 + Math.random() * 10000);
     let emailObj = {
-        added_at: addDate(),
+        added_at: addDate(date),
         content: req.body,
     };
     existEmail[newEmailId] = emailObj;
@@ -59,7 +69,7 @@ app.post("/posts", (req, res) => {
     const existPosts = getPost();
     const newPostId = Math.floor(10000 + Math.random() * 10000);
     let postObj = {
-        added_at: addDate(),
+        added_at: addDate(date),
         postContent: req.body,
     };
     existPosts[newPostId] = postObj;
