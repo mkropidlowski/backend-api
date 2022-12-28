@@ -1,17 +1,18 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const moment = require("moment");
 const fs = require("fs");
 const cors = require("cors");
 const app = express();
+
+process.env.TZ = "europe/warsaw";
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let jsonDataArray = [];
 const dataPath = "./db/formEmail.json";
 const postsPath = "./db/posts-db.json";
-process.env.TZ = "europe/warsaw";
 
 const date = new Date();
 
@@ -29,7 +30,6 @@ const addDate = (time) => {
 
 const saveEmail = (data) => {
     const stringifyData = JSON.stringify(data, null, 2);
-    console.log(stringifyData);
     fs.writeFileSync(dataPath, stringifyData);
 };
 
@@ -69,11 +69,12 @@ app.post("/posts", (req, res) => {
     const existPosts = getPost();
     const newPostId = Math.floor(10000 + Math.random() * 10000);
     let postObj = {
+        id: newPostId,
         added_at: addDate(date),
         postContent: req.body,
     };
-    existPosts[newPostId] = postObj;
-    savePost(existPosts);
+    jsonDataArray.push(...existPosts, postObj);
+    savePost(jsonDataArray);
     res.send({ success: true, msg: "Post added." });
 });
 
@@ -81,6 +82,36 @@ app.get("/posts", (req, res) => {
     const data = getPost();
     res.send(data);
 });
+
+app.delete("/posts/:id", (req, res) => {
+    const idToDelete = req.params.id;
+    fs.readFile(postsPath, "utf-8", (err, posts) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send("Error reading file");
+            return;
+        }
+
+        const allPosts = JSON.parse(posts);
+        const postId = allPosts.findIndex((singlePost) => singlePost.id.toString() === idToDelete);
+
+        if (postId >= 0) {
+            allPosts.splice(postId, 1);
+        }
+
+        fs.writeFile(postsPath, JSON.stringify(allPosts, null, 2), (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send("Error writing file");
+                return;
+            }
+
+            console.log("Post deleted successfully");
+            res.status(200).send("Post deleted successfully");
+        });
+    });
+});
+
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
