@@ -4,16 +4,16 @@ const fs = require("fs");
 const cors = require("cors");
 const app = express();
 
-process.env.TZ = "europe/warsaw";
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let jsonDataArray = [];
-const dataPath = "./db/formEmail.json";
+let jsonEmailArray = [];
+const emailPath = "./db/formEmail.json";
 const postsPath = "./db/posts-db.json";
 
+process.env.TZ = "europe/warsaw";
 const date = new Date();
 
 const addDate = (time) => {
@@ -30,11 +30,11 @@ const addDate = (time) => {
 
 const saveEmail = (data) => {
     const stringifyData = JSON.stringify(data, null, 2);
-    fs.writeFileSync(dataPath, stringifyData);
+    fs.writeFileSync(emailPath, stringifyData);
 };
 
 const getEmail = () => {
-    const jsonData = fs.readFileSync(dataPath);
+    const jsonData = fs.readFileSync(emailPath);
     return JSON.parse(jsonData);
 };
 
@@ -52,11 +52,13 @@ app.post("/api/email", (req, res) => {
     const existEmail = getEmail();
     const newEmailId = Math.floor(10000 + Math.random() * 10000);
     let emailObj = {
+        id: newEmailId,
         added_at: addDate(date),
         content: req.body,
     };
-    existEmail[newEmailId] = emailObj;
-    saveEmail(existEmail);
+
+    jsonEmailArray.push(...existEmail, emailObj);
+    saveEmail(jsonEmailArray);
     res.send({ success: true, msg: "Email send." });
 });
 
@@ -108,6 +110,35 @@ app.delete("/posts/:id", (req, res) => {
 
             console.log("Post deleted successfully");
             res.status(200).send("Post deleted successfully");
+        });
+    });
+});
+
+app.delete("/emails/:id", (req, res) => {
+    const idToDelete = req.params.id;
+    fs.readFile(emailPath, "utf-8", (err, email) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send("Error reading file");
+            return;
+        }
+
+        const allEmails = JSON.parse(email);
+        const emailId = allEmails.findIndex((singleEmail) => singleEmail.id.toString() === idToDelete);
+
+        if (emailId >= 0) {
+            allEmails.splice(emailId, 1);
+        }
+
+        fs.writeFile(emailPath, JSON.stringify(allEmails, null, 2), (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send("Error writing file");
+                return;
+            }
+
+            console.log("Email deleted successfully");
+            res.status(200).send("Email deleted successfully");
         });
     });
 });

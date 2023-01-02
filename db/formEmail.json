@@ -1,26 +1,20 @@
-{
-  "11670": {
-    "added_at": "22.12.2022 - 15:25:12",
+[
+  {
+    "id": 17939,
+    "added_at": "28.12.2022 - 17:17:13",
+    "content": {
+      "name": "Jan Nowak",
+      "sender_email": "mkropidlowsky@gmail.pl",
+      "message": "TESTT"
+    }
+  },
+  {
+    "id": 17797,
+    "added_at": "28.12.2022 - 17:22:06",
     "content": {
       "name": "Michał Kropidłowski",
-      "sender_email": "mi715@wp.pl",
-      "message": "XDDD"
-    }
-  },
-  "13544": {
-    "added_at": "22.12.2022 - 15:28:31",
-    "content": {
-      "name": "Michał",
-      "sender_email": "mi715@wp.pl",
-      "message": "ELO"
-    }
-  },
-  "15559": {
-    "added_at": "28.12.2022 - 16:58:25",
-    "content": {
-      "name": "Michał",
-      "sender_email": "mi715@wp.pl",
+      "sender_email": "mkropidlowsky@gmail.com",
       "message": "TEST"
     }
   }
-}
+]
