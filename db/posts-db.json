@@ -1,38 +1,11 @@
 [
   {
-    "id": 13633,
-    "added_at": "28.12.2022 - 15:08:39",
-    "postContent": {
-      "heading": "post_3",
-      "author": "post_3",
-      "content": "post_3"
-    }
-  },
-  {
     "id": 19261,
     "added_at": "28.12.2022 - 15:08:48",
     "postContent": {
       "heading": "post_4",
       "author": "post_4",
       "content": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem "
-    }
-  },
-  {
-    "id": 15928,
-    "added_at": "28.12.2022 - 16:53:37",
-    "postContent": {
-      "heading": "post_1",
-      "author": "post_1",
-      "content": "post_1"
-    }
-  },
-  {
-    "id": 10577,
-    "added_at": "28.12.2022 - 16:55:18",
-    "postContent": {
-      "heading": "7_To jest test dodawania posta",
-      "author": "Jan Nowak",
-      "content": "Witam"
     }
   }
 ]

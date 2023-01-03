@@ -106,6 +106,8 @@ app.delete("/posts/:id", (req, res) => {
                 console.error(err);
                 res.status(500).send("Error writing file");
                 return;
+            } else {
+                res.json(allPosts);
             }
 
             console.log("Post deleted successfully");
@@ -135,6 +137,8 @@ app.delete("/emails/:id", (req, res) => {
                 console.error(err);
                 res.status(500).send("Error writing file");
                 return;
+            } else {
+                res.json(allEmails);
             }
 
             console.log("Email deleted successfully");
